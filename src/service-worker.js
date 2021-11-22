@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-globals */
+let disabledCache = self.__WB_MANIFEST;
 // In production, we register a service worker to serve assets from local cache.
 
 // This lets the app load faster on subsequent visits in production, and gives
@@ -56,35 +58,42 @@ function registerValidSW(swUrl, config) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
-      // Actualiza el codigo a la fuerza
-      // registration.update();
+      registration.update();
+      setInterval(() => {
+        // Check for updates every 5 minutes
+        registration.update();
+      }, 1000 * 60 * 5);
 
-      // comentar lo de arriba y descomentar lo siguiente para
-      // usar el Cache first
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
-        if (installingWorker == null) {
+        if (installingWorker === null) {
           return;
         }
         installingWorker.onstatechange = () => {
           if (installingWorker.state === "installed") {
             if (navigator.serviceWorker.controller) {
-              // At this point, the updated precached content has been fetched,
-              // but the previous service worker will still serve the older
-              // content until all client tabs are closed.
+              /*
+               * At this point, the updated precached content has been fetched,
+               * but the previous service worker will still serve the older
+               * content until all client tabs are closed.
+               */
               console.log(
                 "New content is available and will be used when all " +
                   "tabs for this page are closed. See https://cra.link/PWA."
               );
+
+              registration.waiting.postMessage({ type: "SKIP_WAITING" });
 
               // Execute callback
               if (config && config.onUpdate) {
                 config.onUpdate(registration);
               }
             } else {
-              // At this point, everything has been precached.
-              // It's the perfect time to display a
-              // "Content is cached for offline use." message.
+              /*
+               * At this point, everything has been precached.
+               * It's the perfect time to display a
+               * "Content is cached for offline use." message.
+               */
               console.log("Content is cached for offline use.");
 
               // Execute callback
