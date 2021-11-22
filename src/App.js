@@ -1,10 +1,20 @@
-import logo from "./logo.svg";
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import "./App.css";
+import Offline from "./components/Offline";
 
 function App() {
   return (
     <div className="App">
-      <p>Hipotecario app</p>
+      <Offline />
+      <div style={{ height: "100vh" }}>
+        <img
+          src="https://i.ibb.co/wC8G4Z4/Captura-de-Pantalla-2021-11-21-a-la-s-23-53-24.png"
+          alt="image"
+          style={{ width: "100%" }}
+        />
+      </div>
+
+      <h1>Version 1</h1>
     </div>
   );
 }
