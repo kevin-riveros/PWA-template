@@ -10,11 +10,11 @@ function App() {
         <img
           src="https://i.ibb.co/wC8G4Z4/Captura-de-Pantalla-2021-11-21-a-la-s-23-53-24.png"
           alt="image"
-          style={{ width: "100%" }}
+          style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
       </div>
 
-      <h1>Version 1</h1>
+      <h1>Version 2</h1>
     </div>
   );
 }
