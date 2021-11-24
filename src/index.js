@@ -13,11 +13,11 @@ ReactDOM.render(
 );
 
 serviceWorkerRegistration.register({
-  onSuccess: (data) => {
-    console.log(data.update, "ON SUCCESS", data);
+  onSuccess: (registration) => {
+    console.log("ON SUCCESS", registration);
   },
-  onUpdate: (data) => {
-    console.log(data.update, "ON UPDATE", data);
+  onUpdate: (registration) => {
+    console.log("ON UPDATE", registration);
   },
 });
 
