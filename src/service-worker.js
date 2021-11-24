@@ -43,8 +43,7 @@ registerRoute(
 
     return true;
   },
-  new NetworkFirst()
-  // createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
+  createHandlerBoundToURL(process.env.PUBLIC_URL + "/index.html")
 );
 
 // An example runtime caching route for requests that aren't handled by the
@@ -80,3 +79,15 @@ self.addEventListener("message", (event) => {
 });
 
 // Any other custom service worker logic can go here.
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    (async function () {
+      try {
+        return await fetch(event.request);
+      } catch (err) {
+        return caches.match(event.request);
+      }
+    })()
+  );
+});

@@ -15,7 +15,7 @@ function App() {
         />
       </div>
 
-      <h1>Version 52</h1>
+      <h1>Version 53</h1>
     </div>
   );
 }
